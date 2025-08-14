@@ -24,6 +24,7 @@ A JavaFX application to visualize **DFS** and **BFS** pathfinding algorithms on 
 
 ### Randomly Generated Map
 - With new fix, it now always have a correct map!
+
 ![Random Map](img/randomMap.png)
 
 ### DFS Pathfinding
