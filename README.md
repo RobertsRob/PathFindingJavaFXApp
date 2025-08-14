@@ -11,6 +11,9 @@ A JavaFX application to visualize **DFS** and **BFS** pathfinding algorithms on 
 - Asynchronous pathfinding with animated drawing.
 - Adjustable animation speed.
 
+### Path finding process
+![Random Map](img/pathFindinGif.png)
+
 
 ## Screenshots
 
