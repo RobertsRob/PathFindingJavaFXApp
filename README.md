@@ -15,13 +15,13 @@ A JavaFX application to visualize **DFS** and **BFS** pathfinding algorithms on 
 ## Screenshots
 
 ### Randomly Generated Map
-![Random Map](path_to_your_image_1.png)
+![Random Map](img/randomMap.png)
 
 ### DFS Pathfinding
-![DFS Example](path_to_your_image_2.png)
+![DFS Example](img/dfs.png)
 
 ### BFS Pathfinding
-![BFS Example](path_to_your_image_3.png)
+![BFS Example](img/bfs.png)
 
 
 ## How to Use
