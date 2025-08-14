@@ -12,7 +12,7 @@ A JavaFX application to visualize **DFS** and **BFS** pathfinding algorithms on 
 - Adjustable animation speed.
 
 ### Path finding process
-![Random Map](img/pathFindinGif.png)
+![Random Map](img/pathFindinGif.gif)
 
 
 ## Screenshots
