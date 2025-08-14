@@ -3,7 +3,7 @@ package com.example.pathfindingjava;
 import java.io.Console;
 import java.util.*;
 
-public class BFS extends Thread{
+public class DFS extends Thread{
     private final Visualizer vs;
     private Map<Integer, AbstractMap.SimpleEntry<Double, Double>> dotMap = new HashMap<>(); // x, y
 
@@ -18,7 +18,7 @@ public class BFS extends Thread{
 
     private Map<Integer, ArrayList<Integer>> pathToDot = new HashMap<>();
 
-    BFS(Visualizer vs, Map<Integer, AbstractMap.SimpleEntry<Double, Double>> dotMap, List<RoadData> roadList, int startDot, int endDot, int sleepTime, TextUpdater textUpdater, String name) {
+    DFS(Visualizer vs, Map<Integer, AbstractMap.SimpleEntry<Double, Double>> dotMap, List<RoadData> roadList, int startDot, int endDot, int sleepTime, TextUpdater textUpdater, String name) {
         super(name);
         this.vs = vs;
         this.dotMap = dotMap;
@@ -31,7 +31,7 @@ public class BFS extends Thread{
 
     public void run() {
         Set<Integer> visited = new HashSet<>();
-        
+
         Deque<Integer> deque = new ArrayDeque<>();
         deque.addLast(startDot);
         visited.add(startDot);
@@ -40,7 +40,7 @@ public class BFS extends Thread{
         int current = 0;
         while(current != endDot && !visited.contains(endDot)) {
             if(!deque.isEmpty())
-                current = deque.pollFirst();
+                current = deque.pollLast();
             else return;
 
             vs.drawDot(dotMap.get(current).getKey(), dotMap.get(current).getValue(), 5, "#FFFF00");

@@ -37,7 +37,7 @@ public class MapGenerator {
             double yPos = randomNum(0, yCanvasWidth);
 
             dotMap.put(i, new SimpleEntry<>(xPos, yPos));
-            if(i == 1 || i == dotAmount) vs.drawDot(xPos, yPos, 8, "#7F00FF");
+            if(i == 1 || i == dotAmount) vs.drawDot(xPos, yPos, 8, "#CD0014");
             else vs.drawDot(xPos, yPos, 4);
         }
 
