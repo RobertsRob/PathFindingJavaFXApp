@@ -28,7 +28,7 @@ public class PathFindingController implements Initializable {
     private MapGenerator mapGenerator;
     private Visualizer vs;
     private int dotAmount = 300;
-    private int lineTries = 15000;
+    private int lineTries = 600;
     private final float timeToWatch = 50;
     private BFS bfs;
     private DFS dfs;
@@ -66,7 +66,7 @@ public class PathFindingController implements Initializable {
         String selectedPathFindingType = (String) pathFindingType.getValue();
         bfs = new BFS(vs, mapGenerator.getDotMap(), mapGenerator.getRoadList(),  1, dotAmount, (int) (timeToWatch * (1 - calculationSpeed / 100) / mapGenerator.getRoadList().size() * 1000), textUpdater,"BFS thread");
         dfs = new DFS(vs, mapGenerator.getDotMap(), mapGenerator.getRoadList(),  1, dotAmount, (int) (timeToWatch * (1 - calculationSpeed / 100) / mapGenerator.getRoadList().size() * 1000), textUpdater,"BFS thread");
-
+        System.out.println(selectedPathFindingType);
         switch (selectedPathFindingType) {
             case "BFS" -> bfs.start();
             case "DFS" -> dfs.start();

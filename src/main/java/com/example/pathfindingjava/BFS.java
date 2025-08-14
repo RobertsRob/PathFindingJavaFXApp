@@ -88,5 +88,45 @@ public class BFS extends Thread{
         }
     }
 
+    public ArrayList<Integer> getListOfAccessiblePoints(int Dot) {
+        ArrayList<Integer> visited = new ArrayList<>();
+
+        Deque<Integer> deque = new ArrayDeque<>();
+        deque.addLast(startDot);
+        visited.add(startDot);
+        pathToDot.put(startDot, new ArrayList<>(List.of(startDot)));
+
+        int current = 0;
+        while(!deque.isEmpty()) {
+            current = deque.pollFirst();
+
+            for (RoadData roadData : roadList) {
+                int dot1 = roadData.dot1();
+                int dot2 = roadData.dot2();
+                if (dot1 == current || dot2 == current) {
+                    int next = dot1 == current ? dot2 : dot1;
+
+                    if (pathToDot.containsKey(next)) {
+                        if (pathToDot.get(next).size() > pathToDot.get(current).size() + 1) {
+                            ArrayList<Integer> newPath = new ArrayList<>(pathToDot.get(current));
+                            newPath.add(next);
+                            pathToDot.put(next, newPath);
+                        }
+                    } else {
+                        ArrayList<Integer> newPath = new ArrayList<>(pathToDot.get(current));
+                        newPath.add(next);
+                        pathToDot.put(next, newPath);
+                    }
+
+                    if (!visited.contains(next)) {
+                        deque.addLast(next);
+                        visited.add(next);
+                    }
+                }
+            }
+        }
+        return visited;
+    }
+
 
 }

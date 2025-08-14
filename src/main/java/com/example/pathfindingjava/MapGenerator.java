@@ -31,7 +31,7 @@ public class MapGenerator {
 
         vs.drawRect(0f, 0f, xCanvasWidth, yCanvasWidth); // set canvas bg
 
-
+//      Dots creation
         for (int i = 1; i <= dotAmount; i++) {
             double xPos = randomNum(0, xCanvasWidth);
             double yPos = randomNum(0, yCanvasWidth);
@@ -41,31 +41,59 @@ public class MapGenerator {
             else vs.drawDot(xPos, yPos, 4);
         }
 
-
+//      Base roads creation
         for (int i = 0; i < lineTries; i++) {
             int randomDot1 = randomNum(1, dotAmount);
             int randomDot2 = randomNum(1, dotAmount);
 
             while(randomDot1 == randomDot2) randomDot2 = randomNum(1, dotAmount);
 
-            drawLine(randomDot1, randomDot2);
+            drawLine(randomDot1, randomDot2, null);
         }
 
+//      Lonely dot removal
         for (int i = 1; i <= dotAmount; i++) {
             if(!dotHavePath.contains(i)){
                 boolean haveLine = false;
                 for (int j = 1; j <= dotAmount; j++) {
                     if(i != j)
-                        if(drawLine(i, j)){
+                        if(drawLine(i, j, null)){
                             haveLine = true;
                             break;
                         }
                 }
             }
         }
+
+//      Checking if roads connects
+
+        BFS bfs = new BFS(vs, dotMap, roadList, 1, dotAmount, 0, null, "Instant road checker");
+        HashSet<Integer> connectedToStartSet = new HashSet<>(bfs.getListOfAccessiblePoints(1));
+        while(connectedToStartSet.size() != dotAmount) {
+            for (int i = 1; i <= dotAmount; i++) {
+                if (!connectedToStartSet.contains(i)) {
+                    BFS bfsGroup = new BFS(vs, dotMap, roadList, i, dotAmount, 0, null, "Instant road checker");
+                    HashSet<Integer> notConnectedGroupSet = new HashSet<>(bfsGroup.getListOfAccessiblePoints(i));
+                    if(ConnectTwoArrayDots(new ArrayList<>(connectedToStartSet), new ArrayList<>(notConnectedGroupSet))) {
+                        connectedToStartSet.addAll(notConnectedGroupSet);
+                    }
+
+//                    System.out.println(i);
+                }
+            }
+//            bfs = new BFS(vs, dotMap, roadList, 1, dotAmount, 0, null, "Instant road checker");
+        }
+
+        BFS bfs2 = new BFS(vs, dotMap, roadList, 1, dotAmount, 0, null, "Instant road checker");
+        HashSet<Integer> connectedToStartSet2 = new HashSet<>(bfs.getListOfAccessiblePoints(1));
+        if(connectedToStartSet2.contains(dotAmount)) System.out.println("have");
+        else System.out.println("dont have");
+        System.out.println(connectedToStartSet.size() + " size :-: dot amount " + dotAmount);
+
+
     }
 
-    public boolean drawLine(int dot1, int dot2){
+    public boolean drawLine(int dot1, int dot2, String hexColor){
         double x1 = dotMap.get(dot1).getKey();
         double y1 = dotMap.get(dot1).getValue();
         double x2 = dotMap.get(dot2).getKey();
@@ -92,7 +120,9 @@ public class MapGenerator {
             roadList.add(new RoadData(dot1, dot2, length));
             dotHavePath.add(dot1);
             dotHavePath.add(dot2);
-            vs.drawLine(x1, y1, x2, y2);
+            if(hexColor == null) vs.drawLine(x1, y1, x2, y2);
+            else vs.drawLine(x1, y1, x2, y2, 4, hexColor);
+
             return true;
         }
 
@@ -139,5 +169,16 @@ public class MapGenerator {
 
     public List<RoadData> getRoadList() {
         return roadList;
+    }
+
+    private boolean ConnectTwoArrayDots(ArrayList<Integer> a, ArrayList<Integer> b) {
+        for(int dot1 : a) {
+            for(int dot2 : b) {
+                if(drawLine(dot1, dot2, null)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
