@@ -4,7 +4,7 @@ A JavaFX application to visualize **DFS** and **BFS** pathfinding algorithms on 
 
 ## New
 - Added bfs check if generated map is possible, now data is alway correct!
-- Works with higher amount of dots. Works with <1 secong map generation time up to 6000 dots and 12000 road tries!
+- Works with higher amount of dots. Works with <1 secong map generation time up to 3000 dots and 6000 road tries!
 
 ![Random Map](img/newMap.png)
 
