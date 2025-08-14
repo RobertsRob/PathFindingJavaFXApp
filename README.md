@@ -2,6 +2,11 @@
 
 A JavaFX application to visualize **DFS** and **BFS** pathfinding algorithms on randomly generated maps. Customize the number of points, road generation attempts, and animation speed.
 
+## New
+- Added bfs check if generated map is possible, now data is alway correct!
+- Works with higher amount of dots. Works with <1 secong map generation time up to 6000 dots and 12000 road tries!
+
+![Random Map](img/newMap.png)
 
 ## Features
 
